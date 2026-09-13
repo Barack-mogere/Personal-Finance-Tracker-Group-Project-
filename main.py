@@ -22,6 +22,65 @@ def register():
         print("\nEmail already exists.")
 
 
+def login():
+    print("\n========== LOGIN ==========")
+
+    email = input("Enter your email: ")
+    password = input("Enter your password: ")
+
+    user = AuthService.login(
+        email,
+        password
+    )
+
+    if user:
+        print(f"\nWelcome, {user.name}!")
+        print(f"Role: {user.role}")
+
+        return user
+
+    else:
+        print("\nInvalid email or password.")
+        return None
+
+
+def user_menu(user):
+    while True:
+        print("\n========================================")
+        print(f"        WELCOME, {user.name.upper()}")
+        print("========================================")
+        print("1. Add Income")
+        print("2. Add Expense")
+        print("3. View Transactions")
+        print("4. View Balance")
+        print("5. Financial Summary")
+        print("6. Logout")
+
+        choice = input("\nChoose an option: ")
+
+        if choice == "1":
+            print("Add Income selected.")
+
+        elif choice == "2":
+            print("Add Expense selected.")
+
+        elif choice == "3":
+            print("View Transactions selected.")
+
+        elif choice == "4":
+            print("View Balance selected.")
+
+        elif choice == "5":
+            print("Financial Summary selected.")
+
+        elif choice == "6":
+            print("\nLogging out...")
+            break
+
+        else:
+            print("Invalid option. Please try again.")
+
+
 def main_menu():
     while True:
         print("\n========================================")
@@ -37,7 +96,10 @@ def main_menu():
             register()
 
         elif choice == "2":
-            print("Login selected.")
+            user = login()
+
+            if user:
+                user_menu(user)
 
         elif choice == "3":
             print("Goodbye!")
