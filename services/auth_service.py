@@ -1,8 +1,8 @@
 # Beatrice
 import hashlib
-import json
 
 from models.user import User
+from utils.storage import JSONStorage
 
 
 class AuthService:
@@ -17,8 +17,7 @@ class AuthService:
 
     @staticmethod
     def register(name, email, password, role="user"):
-        with open("data/users.json", "r") as file:
-            users = json.load(file)
+        users = JSONStorage.load_data("data/users.json")
 
         for user in users:
             if user["email"] == email:
@@ -43,15 +42,13 @@ class AuthService:
 
         users.append(user_data)
 
-        with open("data/users.json", "w") as file:
-            json.dump(users, file, indent=4)
+        JSONStorage.save_data("data/users.json", users)
 
         return True
 
     @staticmethod
     def login(email, password):
-        with open("data/users.json", "r") as file:
-            users = json.load(file)
+        users = JSONStorage.load_data("data/users.json")
 
         for user in users:
             if user["email"] == email:
