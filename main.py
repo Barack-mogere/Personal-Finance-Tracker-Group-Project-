@@ -1,5 +1,6 @@
 # Barack
 from services.auth_service import AuthService
+from services.finance_service import FinanceService
 
 
 def register():
@@ -44,6 +45,26 @@ def login():
         return None
 
 
+def add_income(user):
+    print("\n========== ADD INCOME ==========")
+
+    amount = float(input("Enter amount: "))
+    category = input("Enter category: ")
+    description = input("Enter description: ")
+    date = input("Enter date (YYYY-MM-DD): ")
+
+    success = FinanceService.add_income(
+        user.user_id,
+        amount,
+        category,
+        description,
+        date
+    )
+
+    if success:
+        print("\nIncome added successfully!")
+
+
 def user_menu(user):
     while True:
         print("\n========================================")
@@ -59,7 +80,7 @@ def user_menu(user):
         choice = input("\nChoose an option: ")
 
         if choice == "1":
-            print("Add Income selected.")
+            add_income(user)
 
         elif choice == "2":
             print("Add Expense selected.")
