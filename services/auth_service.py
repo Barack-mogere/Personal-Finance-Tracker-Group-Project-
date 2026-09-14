@@ -1,8 +1,7 @@
 # Beatrice
-import hashlib
-
 from models.user import User
 from utils.storage import JSONStorage
+import hashlib
 
 
 class AuthService:
@@ -29,11 +28,12 @@ class AuthService:
             name,
             email,
             hashed_password,
-            role
+            role,
+            len(users) + 1
         )
 
         user_data = {
-            "id": len(users) + 1,
+            "id": new_user.user_id,
             "name": new_user.name,
             "email": new_user.email,
             "password": new_user.password,
@@ -42,7 +42,10 @@ class AuthService:
 
         users.append(user_data)
 
-        JSONStorage.save_data("data/users.json", users)
+        JSONStorage.save_data(
+            "data/users.json",
+            users
+        )
 
         return True
 
@@ -52,6 +55,7 @@ class AuthService:
 
         for user in users:
             if user["email"] == email:
+
                 if AuthService.verify_password(
                     password,
                     user["password"]
@@ -60,9 +64,16 @@ class AuthService:
                         user["name"],
                         user["email"],
                         user["password"],
-                        user["role"]
+                        user["role"],
+                        user["id"]
                     )
 
                 return None
 
         return None
+
+    @staticmethod
+    def get_all_users():
+        users = JSONStorage.load_data("data/users.json")
+
+        return users
