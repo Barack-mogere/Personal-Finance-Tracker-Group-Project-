@@ -1,1 +1,16 @@
-[]
+[
+    {
+        "id": 1,
+        "name": "barackannan00@gmail.com",
+        "email": "3",
+        "password": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+        "role": "user"
+    },
+    {
+        "id": 2,
+        "name": "Barack",
+        "email": "barackannan00@gmail.com",
+        "password": "f81d859928749fa90afe85abfd81275987751673dda19d9349f6468d00851869",
+        "role": "admin"
+    }
+]

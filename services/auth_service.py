@@ -71,3 +71,9 @@ class AuthService:
                 return None
 
         return None
+
+    @staticmethod
+    def get_all_users():
+        users = JSONStorage.load_data("data/users.json")
+
+        return users
