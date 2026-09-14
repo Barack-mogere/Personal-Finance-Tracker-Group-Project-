@@ -1,5 +1,4 @@
 # Barack
-
 import argparse
 
 from services.auth_service import AuthService
@@ -289,5 +288,20 @@ def main_menu():
             print("Invalid option. Please try again.")
 
 
+def parse_arguments():
+    parser = argparse.ArgumentParser(
+        description="Personal Finance Tracker CLI"
+    )
+
+    parser.add_argument(
+        "--version",
+        action="version",
+        version="Personal Finance Tracker 1.0"
+    )
+
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
+    parse_arguments()
     main_menu()
